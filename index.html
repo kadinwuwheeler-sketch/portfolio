@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Smart Irrigation System</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e0d;
+    --surface: #111512;
+    --surface2: #181f1c;
+    --border: rgba(110,200,160,0.12);
+    --border2: rgba(110,200,160,0.25);
+    --green: #4ecb8d;
+    --green-dim: #2a7a56;
+    --text: #e8ede9;
+    --muted: #7a9080;
+    --accent: #a8f0c8;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Libre Baskerville', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(10,14,13,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--green);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  main { padding-top: 60px; }
+
+  section { padding: 5rem 2.5rem; max-width: 900px; margin: 0 auto; }
+
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 0.5px solid var(--border);
+    max-width: 100%;
+    padding: 5rem 4rem 5rem 4rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat {
+    border-left: 1px solid var(--green-dim);
+    padding-left: 1rem;
+  }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: rgba(78,203,141,0.08);
+    border-color: var(--green);
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border2);
+    max-width: 200px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .problem-block {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-left: 3px solid var(--green);
+    padding: 1.75rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .problem-block p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .problem-block strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .report-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    padding: 1.5rem;
+  }
+
+  .report-card:hover {
+    border-color: var(--border2);
+  }
+
+  .card-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .image-placeholder {
+    background: var(--surface2);
+    border: 0.5px dashed var(--border2);
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .image-placeholder .icon {
+    font-size: 1.5rem;
+    color: var(--green-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .iterations {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .iteration-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    border: 0.5px solid var(--border);
+    border-bottom: none;
+  }
+
+  .iteration-row:last-child {
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .iter-tag {
+    background: var(--surface);
+    padding: 1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    display: flex;
+    align-items: flex-start;
+    text-transform: uppercase;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .iter-content {
+    padding: 1rem 1.25rem;
+  }
+
+  .iter-content p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .iter-content .outcome {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  .outcome.fail { color: #e07070; }
+  .outcome.success { color: var(--green); }
+
+  .code-block {
+    background: #0c1210;
+    border: 0.5px solid var(--border2);
+    padding: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: #aed6b8;
+    overflow-x: auto;
+  }
+
+  .code-comment { color: var(--green-dim); }
+  .code-keyword { color: #7ec8e3; }
+  .code-num { color: #f0b97a; }
+  .code-fn { color: var(--accent); }
+
+  .singapore-section {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    padding: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .singapore-section::before {
+    content: 'SG';
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(78,203,141,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .singapore-section p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+  .singapore-section h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tool-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 0.875rem;
+  }
+
+  .tool-item:first-child { border-top: 0.5px solid var(--border); }
+
+  .tool-name { color: var(--text); font-weight: 400; }
+
+  .tool-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    border: 0.5px solid var(--green-dim);
+    padding: 2px 8px;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .field-visit {
+    background: var(--surface2);
+    border: 0.5px solid var(--border2);
+    border-top: 2px solid var(--green);
+    padding: 1.75rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .field-visit-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .field-visit h4 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .field-visit p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 680px) {
+    nav { padding: 1rem; }
+    .hero { padding: 4rem 1.5rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .report-grid, .about-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    h1 { font-size: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">[ Engineering Portfolio ]</span>
+  <ul class="nav-links">
+    <li><a href="#project">Project</a></li>
+    <li><a href="#singapore">Inspiration</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <div class="hero">
+    <div class="hero-eyebrow">NC State Engineering Applicant · Charlotte, NC</div>
+    <h1>Singapore-Inspired<br><em>Smart Irrigation</em><br>System</h1>
+    <p class="hero-desc">
+      A soil-moisture-driven irrigation prototype built with Arduino + Elegoo sensors and a CAD-designed 3D-printed enclosure — reducing water waste through precision automation.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">15%</div>
+        <div class="stat-label">Moisture Threshold</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Design Iterations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">F360</div>
+        <div class="stat-label">CAD Platform</div>
+      </div>
+    </div>
+    <a href="#project" class="btn">View Project Report ↓</a>
+  </div>
+
+  <section id="project">
+    <div class="section-label">01 — Project</div>
+    <h2>Engineering Report</h2>
+
+    <div class="problem-block">
+      <p><strong>The Problem:</strong> Standard home watering systems operate on arbitrary timers — running for a fixed duration regardless of actual soil conditions. This wastes gallons of water daily through over-irrigation, especially in drought-prone climates.</p>
+    </div>
+
+    <div class="report-grid">
+      <div class="report-card">
+        <div class="card-num">01 — CAD Design Phase</div>
+        <div class="image-placeholder">
+          <div class="icon">⬡</div>
+          Fusion 360 Render
+        </div>
+        <div class="card-title">Custom 3D-Printed Enclosure</div>
+        <div class="card-body">Designed in Autodesk Fusion 360 (Educational License). Key feature: integrated mounting brackets for the Elegoo capacitive soil sensor — eliminating post-assembly alignment errors.</div>
+      </div>
+      <div class="report-card">
+        <div class="card-num">02 — Electronics</div>
+        <div class="image-placeholder">
+          <div class="icon">⬡</div>
+          Breadboard Photo
+        </div>
+        <div class="card-title">Arduino C++ Control Logic</div>
+        <div class="card-body">Elegoo Uno R3 reads analog soil moisture values. When threshold is crossed, the motor relay triggers the valve. A 5-line snippet of the core logic is shown below.</div>
+      </div>
+    </div>
+
+    <div class="code-block">
+<span class="code-comment">// Core irrigation trigger — reads sensor, activates pump</span>
+<span class="code-keyword">int</span> moisture = <span class="code-fn">analogRead</span>(<span class="code-num">A0</span>);
+<span class="code-keyword">int</span> threshold = <span class="code-num">450</span>; <span class="code-comment">// ~15% soil moisture</span>
+<span class="code-keyword">if</span> (moisture > threshold) { <span class="code-fn">digitalWrite</span>(<span class="code-num">RELAY_PIN</span>, HIGH); }
+<span class="code-keyword">else</span>                       { <span class="code-fn">digitalWrite</span>(<span class="code-num">RELAY_PIN</span>, LOW);  }
+    </div>
+
+    <br><br>
+    <div class="section-label" style="margin-bottom: 1.5rem;">03 — Data &amp; Iteration Log</div>
+
+    <div class="iterations">
+      <div class="iteration-row">
+        <div class="iter-tag">Iteration 1</div>
+        <div class="iter-content">
+          <p>Initial prototype used a mechanical valve assembly. Under pressure testing, the gasket seal failed at the junction with the printed housing.</p>
+          <div class="outcome fail">✗ Mechanical valve leaked</div>
+        </div>
+      </div>
+      <div class="iteration-row">
+        <div class="iter-tag">Fix</div>
+        <div class="iter-content">
+          <p>Redesigned the gasket seat geometry in Fusion 360 — added a 1.2mm lip channel and re-printed with 40% infill. Seal held under 2x rated pressure.</p>
+          <div class="outcome success">✓ Redesigned &amp; re-printed</div>
+        </div>
+      </div>
+      <div class="iteration-row">
+        <div class="iter-tag">Iteration 2</div>
+        <div class="iter-content">
+          <p>Code successfully triggered the motor relay based on the 15% moisture threshold. Pump activated within 200ms of sensor crossing the analog threshold value.</p>
+          <div class="outcome success">✓ System functional end-to-end</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-visit">
+      <div class="field-visit-label">Field Research — Singapore 2025</div>
+      <h4>Gardens by the Bay — Observation Notes</h4>
+      <p>Visiting Gardens by the Bay as active field research: documenting the Supertree Grove's passive water-collection systems, the Flower Dome's climate-controlled humidity regulation, and the park's award-winning greywater reuse infrastructure. [Add your photos, observations, and any conversations with NParks staff here.]</p>
+    </div>
+  </section>
+
+  <section id="singapore">
+    <div class="section-label">02 — Inspiration</div>
+    <h2>The Singapore Connection</h2>
+    <div class="singapore-section">
+      <h3>Systems efficiency as a design philosophy</h3>
+      <p>
+        Living in Singapore exposed me to infrastructure that treats resource efficiency not as a constraint, but as a design objective. The national water reclamation strategy, the MRT's real-time load-balancing, and the NEWater program all share a common principle: every unit of input should be accounted for and maximized.
+      </p>
+      <br>
+      <p>
+        This project applies that philosophy at the residential scale — replacing arbitrary timer-based irrigation with closed-loop sensor feedback. The goal is the same: eliminate waste through precision.
+      </p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">03 — About</div>
+    <h2>The Builder</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>High school junior in the Charlotte, NC area. Applying to NC State University for Mechanical Engineering with a focus on systems efficiency and sustainable infrastructure.</p>
+        <p>My engineering spike: connecting large-scale infrastructure thinking (Singapore's urban planning, MRT systems) to hands-on prototype work — collecting real data, documenting failures, and iterating.</p>
+        <a href="#contact" class="btn" style="margin-top: 1rem;">Get in touch ↗</a>
+      </div>
+      <div>
+        <div class="tools-list">
+          <div class="tool-item">
+            <span class="tool-name">Autodesk Fusion 360</span>
+            <span class="tool-tag">CAD</span>
+          </div>
+          <div class="tool-item">
+            <span class="tool-name">Arduino C++ / Elegoo Uno R3</span>
+            <span class="tool-tag">Electronics</span>
+          </div>
+          <div class="tool-item">
+            <span class="tool-name">FDM 3D Printing</span>
+            <span class="tool-tag">Fabrication</span>
+          </div>
+          <div class="tool-item">
+            <span class="tool-name">Capacitive Soil Sensors</span>
+            <span class="tool-tag">Sensing</span>
+          </div>
+          <div class="tool-item">
+            <span class="tool-name">Data Logging / Iteration</span>
+            <span class="tool-tag">Method</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">04 — Contact</div>
+    <h2>Let's Connect</h2>
+    <p style="color: var(--muted); max-width: 480px; margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.8;">
+      I'm always interested in conversations with engineers, researchers, and educators working on sustainability, systems design, or embedded electronics. Based in Charlotte, NC — open to UNCC lab visits and mentorship conversations.
+    </p>
+    <a href="mailto:your@email.com" class="btn">your@email.com ↗</a>
+  </section>
+
+</main>
+
+<footer>
+  <span>[YOUR NAME] — Engineering Portfolio</span>
+  <span>Charlotte, NC · Summer 2025</span>
+</footer>
+
+</body>
+</html>
